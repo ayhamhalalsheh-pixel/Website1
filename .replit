@@ -1,9 +1,9 @@
+language = "Python3"
+run = "app.py"
 modules = ["python-3.11"]
+
 [agent]
 expertMode = true
-
-[nix]
-channel = "stable-25_05"
 
 [workflows]
 runButton = "Project"
@@ -15,23 +15,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Flask Server"
+args = "Python Script"
 
 [[workflows.workflow]]
-name = "Flask Server"
+name = "Python Script"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python app.py"
-waitForPort = 5000
 
 [workflows.workflow.metadata]
-outputType = "webview"
-
-[[ports]]
-localPort = 5000
-
-[deployment]
-deploymentTarget = "autoscale"
-run = ["gunicorn", "--bind=0.0.0.0:5000", "--reuse-port", "app:app"]
+outputType = "console"
